@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dharanidhar University | Courses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+header{background:#0b3d91;color:#fff;padding:15px 40px;display:flex;justify-content:space-between}
+nav a{color:#fff;margin-left:18px;text-decoration:none}
+.section{padding:70px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.badge{display:inline-block;background:#0b3d91;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px}
+footer{background:#111;color:#ddd;text-align:center;padding:20px}
+</style>
+<style>
+/* Syllabus section */
+.syllabus-item { margin-bottom: 12px; }
+.syllabus-btn {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  background: #0b3d91;
+  color: #e4e2ec;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.syllabus-btn:hover { background: #092f70; }
+.syllabus-content {
+  display: none;
+  background: #102a53;
+  padding: 14px 20px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+.syllabus-content ul { margin-left: 16px; }
+</style>
+
+</head>
+<body>
+<header>
+  <strong>Dharanidhar University</strong>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <section class="section" id="syllabus">
+  <h2>Syllabus / Curriculum</h2>
+  <p>Click on a semester to view subjects.</p><br>
+
+  <div class="syllabus-item">
+    <button class="syllabus-btn" onclick="toggleSyllabus('sem1')">Semester 1</button>
+    <div class="syllabus-content" id="sem1">
+      <ul>
+        <li>Mathematics I</li>
+        <li>Programming in C</li>
+        <li>Computer Fundamentals</li>
+        <li>Communication Skills</li>
+        <li>Environmental Studies</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="syllabus-item">
+    <button class="syllabus-btn" onclick="toggleSyllabus('sem2')">Semester 2</button>
+    <div class="syllabus-content" id="sem2">
+      <ul>
+        <li>Mathematics II</li>
+        <li>Data Structures</li>
+        <li>Object-Oriented Programming</li>
+        <li>Operating Systems</li>
+        <li>Digital Electronics</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="syllabus-item">
+    <button class="syllabus-btn" onclick="toggleSyllabus('sem3')">Semester 3</button>
+    <div class="syllabus-content" id="sem3">
+      <ul>
+        <li>Database Management Systems</li>
+        <li>Computer Networks</li>
+        <li>Web Technologies</li>
+        <li>Software Engineering</li>
+        <li>Mini Project</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</header>
+
+<section class="section">
+  <h1>Programs & Departments</h1><br>
+  <div class="grid">
+    <div class="card">
+      <span class="badge">Engineering</span>
+      <h3>B.Tech Computer Science</h3>
+      <p>Duration: 4 Years</p>
+      <p>Eligibility: 10+2 with PCM</p>
+    </div>
+    <div class="card">
+      <span class="badge">Management</span>
+      <h3>MBA (Business Analytics)</h3>
+      <p>Duration: 2 Years</p>
+      <p>Eligibility: Graduation</p>
+    </div>
+    <div class="card">
+      <span class="badge">Science</span>
+      <h3>B.Sc AI & Data Science</h3>
+      <p>Duration: 3 Years</p>
+      <p>Eligibility: 10+2 with Math</p>
+    </div>
+    <div class="card">
+      <span class="badge">Engineering</span>
+      <h3>M.Tech Robotics</h3>
+      <p>Duration: 2 Years</p>
+      <p>Eligibility: B.Tech</p>
+    </div>
+  </div>
+</section>
+<input type="text" id="search" placeholder="Search course..." onkeyup="filterCourses()" style="padding:10px;width:100%;margin-bottom:20px;">
+
+<div class="grid" id="courseList">
+  <div class="card">B.Tech Computer Science</div>
+  <div class="card">MBA Business Analytics</div>
+  <div class="card">B.Sc AI & Data Science</div>
+  <div class="card">M.Tech Robotics</div>
+</div>
+
+<script>
+function filterCourses(){
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.querySelectorAll("#courseList .card");
+
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(input) ? "block" : "none";
+  });
+}
+</script>
+<script>
+function toggleSyllabus(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+
+
+<footer>© Dharanidhar University</footer>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dharanidhar University | Departments</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+header{background:#0b3d91;color:#fff;padding:15px 40px;display:flex;justify-content:space-between}
+nav a{color:#fff;margin-left:18px;text-decoration:none}
+.section{padding:70px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+footer{background:#111;color:#ddd;text-align:center;padding:20px}
+.dept-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.dept-card{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  transition:.3s;
+}
+.dept-card:hover{
+  transform:translateY(-8px);
+  background:#eef2ff;
+}
+
+.dept-details{
+  display:none;
+  max-width:900px;
+  margin:40px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  animation:fadeIn .4s ease;
+}
+
+#backBtn{
+  margin-bottom:15px;
+  padding:8px 14px;
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.detail-img{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.dept-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+</style>
+</head>
+<body>
+<header>
+  <strong>Dharanidhar University</strong>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<section class="section">
+  <h2 class="center">Our Departments</h2>
+  <div class="dept-grid" id="deptContainer"></div>
+</section>
+<!-- Dynamic Detail Section -->
+<section id="deptDetails" class="dept-details">
+  <button id="backBtn">⬅ Back</button>
+  <img id="detailImage" class="detail-img">
+  <h2 id="detailTitle"></h2>
+  <p id="detailDesc"></p>
+  <ul id="detailCourses"></ul>
+</section>
+
+<footer>© Dharanidhar University</footer>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const departments = {
+    cse:{
+      name:"Computer Science",
+      image:"images/cse.jpg",
+      description:"Modern computer labs, coding culture, AI & ML research, strong placement support.",
+      courses:["BCA","MCA","PhD in CS"]
+    },
+    bba:{
+      name:"Business Administration",
+      image:"images/bba.jpg",
+      description:"Entrepreneurship, leadership programs and industry collaboration.",
+      courses:["BBA","MBA","Executive MBA"]
+    },
+    physics:{
+      name:"Physics",
+      image:"images/physics.jpg",
+      description:"Advanced research labs and theoretical physics programs.",
+      courses:["B.Sc","M.Sc","PhD"]
+    },
+    english:{
+      name:"English",
+      image:"images/english.jpg",
+      description:"Literature studies, language development and research programs.",
+      courses:["BA English","MA English"]
+    },
+    mathematics:{
+      name:"Mathematics",
+      image:"images/math.jpg",
+      description:"Pure and applied mathematics with research opportunities.",
+      courses:["B.Sc Math","M.Sc Math","PhD"]
+    }
+  };
+
+  const container = document.getElementById("deptContainer");
+  const detailSection = document.getElementById("deptDetails");
+  const detailTitle = document.getElementById("detailTitle");
+  const detailDesc = document.getElementById("detailDesc");
+  const detailCourses = document.getElementById("detailCourses");
+  const detailImage = document.getElementById("detailImage");
+  const backBtn = document.getElementById("backBtn");
+
+  // Create cards dynamically
+  for(let key in departments){
+    const card = document.createElement("div");
+    card.className = "dept-card";
+
+    card.innerHTML = `
+      <img src="${departments[key].image}">
+      <h3>${departments[key].name}</h3>
+      <p>Click to view details</p>
+    `;
+
+    card.addEventListener("click", function(){
+      showDetails(key);
+    });
+
+    container.appendChild(card);
+  }
+
+  function showDetails(deptKey){
+    const dept = departments[deptKey];
+
+    detailTitle.textContent = dept.name;
+    detailDesc.textContent = dept.description;
+    detailImage.src = dept.image;
+
+    detailCourses.innerHTML = "";
+    dept.courses.forEach(course=>{
+      const li = document.createElement("li");
+      li.textContent = course;
+      detailCourses.appendChild(li);
+    });
+
+    container.style.display = "none";
+    detailSection.style.display = "block";
+  }
+
+  backBtn.addEventListener("click", function(){
+    detailSection.style.display = "none";
+    container.style.display = "grid";
+  });
+
+});
+</script>
+
+
+</body>
+</html>
